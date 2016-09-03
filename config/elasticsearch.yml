@@ -1,0 +1,8 @@
+path:
+  data: /data/data
+  logs: /data/log
+  plugins: /data/plugins
+  work: /data/work
+network.bind_host: "0"
+couchbase.password: admin123
+couchbase.username: Admin
