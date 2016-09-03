@@ -5,7 +5,9 @@
 
 ### Usage
 
-    docker run -d -p 9200:9200 -p 9300:9300 -p 9091:9091 <build-name>
+    docker build -t <build-name> .
+
+    docker run -d -e CB_NAME=<username> -e CB_PASS=<passwd> -p 9200:9200 -p 9300:9300 -p 9091:9091 <build-name>
 
 
 After few seconds, open `http://<host>:9200` to see the result.

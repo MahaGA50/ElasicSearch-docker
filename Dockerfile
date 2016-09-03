@@ -16,11 +16,15 @@ RUN \
 # Mount elasticsearch.yml config
 COPY config ./config
 
+COPY docker-entrypoint.sh /
+
 # Expose ports.
 #   - 9200: HTTP
 #   - 9300: transport
 #   - 9091:transport couchbase
 EXPOSE 9200 9300 9091
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
 
 # Define default command.
 CMD ["elasticsearch"]
