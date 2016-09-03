@@ -6,7 +6,7 @@
 ### Usage 
 #### Using Ansible command
     
-sudo ansible-playbook PlayBook.yml --extra-vars "VAR_CB_NAME=<username> VAR_CB_PASS=<passwd>"
+    sudo ansible-playbook PlayBook.yml --extra-vars "VAR_CB_NAME=<username> VAR_CB_PASS=<passwd>"
 
 #### OR Using docker commands
     docker build -t <build-name> .
