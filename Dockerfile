@@ -1,38 +1,27 @@
 #
-# Elasticsearch Dockerfile
-#
+# Elasticsearch-transport-couchbase plugin Dockerfile
 
 # Pull base image.
-FROM java:8
+FROM elasticsearch:2.3.5
 
-ENV ES_PKG_NAME elasticsearch-2.2.0
-# Install Elasticsearch.
+ENV ES_VERSION 2.3.5
+ENV CB_PASS $CB_PASS
+ENV CB_NAME $CB_NAME
+
+# Install Elasticsearch-transport-couchbase
 RUN \
-  cd / && \
-  wget https://download.elasticsearch.org/elasticsearch/elasticsearch/$ES_PKG_NAME.tar.gz && \
-  tar xvzf $ES_PKG_NAME.tar.gz && \
-  rm -f $ES_PKG_NAME.tar.gz && \
-  mv /$ES_PKG_NAME /elasticsearch && \
- cd /elasticsearch && \
  bin/plugin install mobz/elasticsearch-head && \
- bin/plugin install -b https://github.com/couchbaselabs/elasticsearch-transport-couchbase/releases/download/2.2.2.0/elasticsearch-transport-couchbase-2.2.2.0.zip
-
-# Define mountable directories.
-VOLUME ["/data"]
+ bin/plugin install -b https://github.com/couchbaselabs/elasticsearch-transport-couchbase/releases/download/2.$ES_VERSION/elasticsearch-transport-couchbase-2.$ES_VERSION.zip
 
 # Mount elasticsearch.yml config
-ADD config/elasticsearch.yml /elasticsearch/config/elasticsearch.yml
-
-# Define working directory.
-WORKDIR /elasticsearch
-
-# Define default command.
-#CMD ["/elasticsearch/bin/elasticsearch -Des.insecure.allow.root=true"]
+COPY config ./config
 
 # Expose ports.
 #   - 9200: HTTP
 #   - 9300: transport
 #   - 9091:transport couchbase
-EXPOSE 9200
-EXPOSE 9300
-EXPOSE 9091
+EXPOSE 9200 9300 9091
+
+# Define default command.
+CMD ["elasticsearch"]
+
