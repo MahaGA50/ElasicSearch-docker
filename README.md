@@ -3,8 +3,12 @@
 
 1. Install [Docker](https://www.docker.com/).
 
-### Usage
+### Usage 
+#### Using Ansible command
+    
+sudo ansible-playbook PlayBook.yml --extra-vars "VAR_CB_NAME=<username> VAR_CB_PASS=<passwd>"
 
+#### OR Using docker commands
     docker build -t <build-name> .
 
     docker run -d -e CB_NAME=<username> -e CB_PASS=<passwd> -p 9200:9200 -p 9300:9300 -p 9091:9091 <build-name>

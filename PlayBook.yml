@@ -1,0 +1,21 @@
+---
+- name: Build an elasticsearch container
+  hosts: localhost
+  tasks:
+    - name: build the image
+      command: docker build -t elastictest:ex1 .
+
+    - name: run the elastictest:v3 in a docker container
+      docker:
+        name: test
+        image: "elastictest:ex1"
+        state: started
+        ports:
+          -  "9091:9091" 
+          -  "9300:9300" 
+          -  "9200:9200"
+        publish_all_ports: yes
+        env: 
+          CB_NAME='{{ VAR_CB_NAME }}' 
+          CB_PASS='{{ VAR_CB_PASS }}'
+    
